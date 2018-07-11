@@ -3,7 +3,8 @@
 ## 页面布局
 
 1. [宣传页面](https://coman-ife.github.io/Baidu-IFE//2018/43/)
-2. [聊天页面](https://coman-ife.github.io/Baidu-IFE//2018/44/)
+1. [聊天页面](https://coman-ife.github.io/Baidu-IFE//2018/44/)
+1. [简单布局](https://coman-ife.github.io/Demos/)
 
 # CSS案例
 
