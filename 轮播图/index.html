@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播图组件</title>
+    <style>
+        body,ul{
+            margin:0;
+            padding:0;
+        }
+        ul{
+            list-style: none;
+        }
+        .clearfix::after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .wrapper{
+            width: 600px;
+            margin: 100px auto;
+        }
+        .slider{
+            width: 500px;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        .slider .main-content{
+            width: 3000px;
+            position: absolute;    
+        }
+       .slider .main-content li{
+           float: left;
+           width: 500px;
+           height: 200px;
+           overflow: hidden;
+        }
+        .slider .indicators{
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+        .slider .indicators li{
+            display: inline-block;
+            font-size: 16px;
+            padding: 5px 10px;
+            background-color: #ccc;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .slider .indicators li:hover,.slider em:hover,.slider .indicators li.current{
+            color: #ccc;
+            background-color: #666;
+        }
+
+        .slider em{
+            position: absolute;
+            display: inline-block;
+            height:30px;
+            width: 30px;
+            font-size: 20px;
+            line-height:30px;
+            text-align: center;
+            background-color: #ccc;
+            color: #666;            
+            top: 50%;
+            margin-top: -15px;
+            cursor: pointer;
+        }
+        .slider .previous{
+            left: 0;
+        }
+        .slider .next{
+            right: 0;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="slider" id="slider">
+            <ul class="main-content">
+                <li><img src="./images/1.jpg" alt=""></li>
+                <li><img src="./images/2.jpg" alt=""></li>
+                <li><img src="./images/3.jpg" alt=""></li>
+                <li><img src="./images/4.jpg" alt=""></li>
+                <li><img src="./images/5.jpg" alt=""></li>
+            </ul>
+            <div class="indicators  clearfix">
+                <ul>
+                    <li class="current">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
+            </div>
+            <em class="previous">&lt;</em>
+            <em class="next">&gt;</em>
+        </div>
+    </div>
+    <script>        
+        var mainContent=document.querySelector("#slider .main-content")
+        var slider=document.querySelector("#slider")
+        var indicators=document.querySelectorAll("#slider .indicators li")
+        var previousBtn=document.querySelector("#slider .previous")
+        var nextBtn=document.querySelector("#slider .next")
+        var currentIndex=0
+        var autoPlayTimer=null  
+
+        mainContent.appendChild(mainContent.children[0].cloneNode(true))   
+
+        for(var i=0;i<indicators.length;i++){
+            indicators[i].index=i
+            indicators[i].onmouseover=function(){
+                for(var j=0;j<indicators.length;j++){
+                    indicators[j].className=""
+                }
+                this.className="current"
+                currentIndex=this.index
+                linerMove(mainContent,-this.index*500)                
+            }
+        }
+        previousBtn.onclick=previous
+        nextBtn.onclick=next
+        
+        function linerMove(obj,dest){
+            clearInterval(obj.timer)
+            var step=obj.offsetLeft>dest?-10:10;
+            step=step*Math.abs(obj.offsetLeft-dest)/500
+            if(Math.abs(step)>70){
+                console.log(step,obj.offsetLeft,dest)
+                throw Error()
+            }
+            console.log(step)
+            obj.timer=setInterval(function(){
+                if(Math.abs(obj.offsetLeft-dest)<Math.abs(step)){
+                    clearInterval(obj.timer)
+                    obj.style.left=dest+"px"
+                   
+                }else{
+                    obj.style.left=obj.offsetLeft+step+"px"
+                }                
+            },10)
+        }
+        function next(){
+            currentIndex++;
+            if(currentIndex>indicators.length){
+                currentIndex=1
+                mainContent.style.left=0+"px"
+            }
+            linerMove(mainContent,-currentIndex*500)                
+            for(var j=0;j<indicators.length;j++){
+                indicators[j].className=""
+            }
+            indicators[currentIndex>indicators.length-1?0:currentIndex].className="current"            
+        }
+        function previous(){
+            currentIndex--;
+            if(currentIndex<0){
+                currentIndex=indicators.length-1
+                mainContent.style.left=-indicators.length*500+"px"
+            }
+            linerMove(mainContent,-currentIndex*500)                
+            for(var j=0;j<indicators.length;j++){
+                indicators[j].className=""
+            }
+            indicators[currentIndex].className="current" 
+        }       
+
+        autoPlayTimer=setInterval(next,1000)
+        slider.onmouseover=function(){
+            clearInterval(autoPlayTimer)
+        }
+        slider.onmouseout=function(){
+            autoPlayTimer=setInterval(next,1000)
+        }
+        
+    </script>
+</body>
+</html>
