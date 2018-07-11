@@ -15,6 +15,7 @@
 
 ## JS案例
 
+1. [20切割轮播图](https://coman-ife.github.io/Demos/20切割轮播图)
 1. [餐厅案例](https://coman-ife.github.io/Baidu-IFE//2018/60/)
 1. [报表编辑展示](https://coman-ife.github.io/Baidu-IFE//2018/57/)
 1. [输入过滤提示](https://coman-ife.github.io/Baidu-IFE//2018/52/)
