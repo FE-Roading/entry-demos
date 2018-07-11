@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>鼠标进入方向判定案例</title>
+</head>
+<style>
+    body,
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .wrapper {
+        width: 1000px;
+        margin: 50px auto;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    ul::after {
+        content: " ";
+        display: block;
+        clear: both;
+    }
+
+    ul li {
+        float: left;
+        position: relative;
+        overflow: hidden;
+        height: 300px;
+        width: 300px;
+        margin-right: 50px;
+        margin-bottom: 50px;
+        border-radius: 50px;
+    }
+
+    ul li:nth-child(3n) {
+        margin-right: 0;
+    }
+
+    ul li img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50px;
+    }
+
+    ul li div {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: rotate(-100deg);
+        transform-origin: left top;
+        transition: transform 0.8s ease-in-out;
+    }
+
+    .current div {
+        transform: rotate(0deg);
+    }
+
+    .top {
+        transform-origin: top left;
+    }
+
+    .right {
+        transform-origin: top right;
+    }
+
+    .bottom {
+        transform-origin: bottom right;
+    }
+
+    .left {
+        transform-origin: bottom left;
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <ul>
+            <li>
+                <img src="./images/bg.jpg" alt="">
+                <div>
+                    <img src="./images/1.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <img src="./images/bg.jpg" alt="">
+                <div>
+                    <img src="./images/2.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <img src="./images/bg.jpg" alt="">
+                <div>
+                    <img src="./images/3.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <img src="./images/bg.jpg" alt="">
+                <div>
+                    <img src="./images/4.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <img src="./images/bg.jpg" alt="">
+                <div>
+                    <img src="./images/5.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <img src="./images/bg.jpg" alt="">
+                <div>
+                    <img src="./images/6.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <img src="./images/bg.jpg" alt="">
+                <div>
+                    <img src="./images/7.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <img src="./images/bg.jpg" alt="">
+                <div>
+                    <img src="./images/8.jpg" alt="">
+                </div>
+            </li>
+            <li>
+                <img src="./images/bg.jpg" alt="">
+                <div>
+                    <img src="./images/9.jpg" alt="">
+                </div>
+            </li>
+
+        </ul>
+    </div>
+    <script src="./jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            $(".wrapper li").on("mouseenter mouseleave", function (e) {
+                var that = $(this)
+                var w = $(this).width(); // 得到盒子宽度
+                var h = $(this).height(); // 得到盒子高度
+                var x = (e.pageX - this.offsetLeft - (w / 2)) * (w > h ? (h / w) : 1);
+                // 获取x值
+                var y = (e.pageY - this.offsetTop - (h / 2)) * (h > w ? (w / h) : 1);
+                // 获取y值
+                var direction = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4; //direction的值为“0,1,2,3”分别对应着“上，右，下，左”
+                // 将点的坐标对应的弧度值换算成角度度数值
+                if (e.type == 'mouseenter') {
+                    switch (direction) {
+                        case 0:
+                            comeIn("top");
+                            break;
+                        case 1:
+                            comeIn("right");
+                            break;
+                        case 2:
+                            comeIn("bottom");
+                            break;
+                        case 3:
+                            comeIn("left");
+                            break;
+                    }
+                } else {
+                    switch (direction) {
+                        case 0:
+                            comeOut("top");
+                            break;
+                        case 1:
+                            comeOut("right");
+                            break;
+                        case 2:
+                            comeOut("bottom");
+                            break;
+                        case 3:
+                            comeOut("left");
+                            break;
+                    }
+                }
+
+                function comeIn(str) {
+                    that.children("div").removeClass().addClass(str)
+                    that.addClass("current")
+                }
+
+                function comeOut(str) {
+                    that.removeClass("current")
+                    that.children("div").removeClass().addClass(str)
+                }
+            });
+
+
+        })
+    </script>
+
+</body>
+
+</html>
