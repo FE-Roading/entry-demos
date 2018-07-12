@@ -16,6 +16,7 @@
 
 ## JS案例
 
+1. [瀑布流布局](https://coman-ife.github.io/Demos/瀑布流布局)
 1. [聊天窗口模仿](https://coman-ife.github.io/Demos/聊天窗口模仿)
 1. [轮播图](https://coman-ife.github.io/Demos/轮播图)
 1. [鼠标进入方向案例](https://coman-ife.github.io/Demos/鼠标进入方向案例)

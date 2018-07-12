@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>瀑布流布局</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrapper {
+            width: 1050px;
+            margin: 0 auto;
+        }
+
+        #waterfull {
+            position: relative;
+        }
+
+        #waterfull .item {
+            position: absolute;
+            padding: 4px;
+            border: 1px solid grey;
+            overflow: hidden;
+        }
+
+        #waterfull .item:hover span {
+            bottom: 0;
+        }
+
+        #waterfull .item img {
+            width: 192px;
+            vertical-align: middle;
+        }
+
+        #waterfull .item span {
+            width: 192px;
+            position: absolute;
+            padding: 10px;
+            text-align: center;
+            bottom: -100%;
+            background-color: rgba(66, 66, 66, 0.6);
+            color: #ccc;
+            font-size: 16px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="waterfull">
+            <div class="item">
+                <img src="./images/P_000.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_001.jpg" alt="">
+                <span>提示信息，很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_002.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_003.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_004.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_005.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_006.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_007.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_002.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_003.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_004.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_005.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_006.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_007.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_002.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_003.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_004.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_005.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_006.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_007.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_002.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_003.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_004.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_005.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_006.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_007.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_002.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_003.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_004.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_005.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_006.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+            <div class="item">
+                <img src="./images/P_007.jpg" alt="">
+                <span>提示信息</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        var json = [{
+                "src": "./images/P_000.jpg"
+            },
+            {
+                "src": "./images/P_001.jpg"
+            },
+            {
+                "src": "./images/P_002.jpg"
+            },
+            {
+                "src": "./images/P_003.jpg"
+            },
+            {
+                "src": "./images/P_004.jpg"
+            },
+            {
+                "src": "./images/P_005.jpg"
+            },
+            {
+                "src": "./images/P_006.jpg"
+            },
+            {
+                "src": "./images/P_007.jpg"
+            },
+            {
+                "src": "./images/P_008.jpg"
+            },
+            {
+                "src": "./images/P_009.jpg"
+            },
+            {
+                "src": "./images/P_010.jpg"
+            }
+        ];
+        window.onload = function () {
+            var waterfull = document.getElementById("waterfull")
+            var item = waterfull.getElementsByClassName("item")[0]
+
+            var column = parseInt(waterfull.offsetWidth / item.offsetWidth)
+            var gap = waterfull.offsetWidth % item.offsetWidth / column
+
+            var wArr = []
+            layout()
+
+            window.onscroll = debounce(load)
+
+            function load() {
+                if (window.pageYOffset + window.innerHeight > getMin(wArr).value) {
+                    var tmp = null
+                    for (var i of json) {
+                        tmp = document.createElement("div")
+                        tmp.className="item"
+                        tmp.innerHTML = '<img src="' + i.src + '" alt=""><span>提示信息</span>'
+                        waterfull.appendChild(tmp)
+                    }
+                    layout()
+                }
+            }
+
+            function debounce(fn) {
+                let timer = null
+                return function (...args) {
+                    if (timer != null) {
+                        clearTimeout(timer)
+                    }
+                    timer = setTimeout(() => {
+                        fn.apply(this, args)
+                        timer = null
+                    }, 300)
+                }
+            }
+
+            function layout() {
+                var items = waterfull.getElementsByClassName("item")
+                for (var i = 0; i < items.length; i++) {
+                    if (i < column) {
+                        wArr[i] = items[i].offsetHeight + gap
+                        items[i].style.left = i * (item.offsetWidth + gap) + "px"
+                    } else {
+                        var min = getMin(wArr)
+                        items[i].style.left = min.index * (item.offsetWidth + gap) + "px"
+                        items[i].style.top = min.value + "px"
+                        wArr[min.index] = min.value + items[i].offsetHeight + gap
+                    }
+                }
+            }
+
+            function getMin(arr) {
+                var temp = arr[0]
+                var index = 0
+                for (var i = 1; i < arr.length; i++) {
+                    if (arr[i] < temp) {
+                        temp = arr[i]
+                        index = i
+                    }
+                }
+                return {
+                    index: index,
+                    value: temp
+                }
+
+            }
+
+
+
+
+
+        }
+    </script>
+</body>
+
+</html>
