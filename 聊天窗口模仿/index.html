@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>聊天窗口模仿</title>
+	<style>
+		body,ul{
+			padding: 0;
+			margin: 0;			
+		}
+		ul{
+			list-style: none;
+		}
+		*{
+			box-sizing: border-box;
+		}
+		.wrapper{
+			width: 500px;
+			margin:100px auto;
+			outline: 1px solid black;
+			box-sizing: content-box;
+			padding: 20px;
+		}
+		.title{
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			background-color: #222;
+			color: #eee;
+		}
+		.clearfix::after{
+			content: "";
+			display: block;
+			clear: both;
+		}
+		.content{
+			padding: 20px;
+		}
+		.content li{
+			margin-bottom: 10px;
+			line-height: 20px;			
+			position: relative;	
+			padding-left: 50px;
+			padding-right: 50px;	
+		}		
+		.wrapper img{
+			width: 40px;
+   			height: 40px;
+			border-radius: 5px;
+		}
+		#msg-container{
+			max-height: 600px;
+			overflow: auto;
+		}
+		.content li span{
+			line-height: 40px;
+			font-size: 20px;	
+			display: inline-block;
+			background-color: yellowgreen;
+			border-radius: 10px;
+			padding: 10px;	
+		}	
+		.content li.left img{
+			position: absolute;
+			left: 0;
+			top: 5px;
+		}	
+		.content li.right img{
+			position: absolute;
+			right: 0;
+			top: 5px;
+		}
+		.content li.right{
+			text-align: right;
+		}
+		.content li.right span{
+			text-align: left;
+		}
+		.bottom img,.bottom input,.bottom button{
+			vertical-align: middle;
+			height: 40px;
+		}
+		.bottom img{
+			cursor: pointer;
+		}
+		.bottom input{
+			width: 356px;
+			margin-right: 20px;
+			margin-left: 20px;
+			font-size: 20px;
+			padding-left: 10px;
+			border-radius: 5px;
+			outline: none;
+		}
+		.bottom button{
+			padding-left: 10px;
+			padding-right: 10px;
+			font-size: 20px;
+			border-radius: 5px;
+			outline: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="title">聊天窗口界面</div>
+		<div class="content">
+			<ul id="msg-container" class="clearfix">
+					<li class="left">
+							<span>聊天天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面信息</span><img src="./images/1.jpg" alt="">
+						</li>
+				<li class="right">
+				 	<span>聊天天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面天窗口界面信息</span><img src="./images/1.jpg" alt="">
+				</li>
+				<li class="right">
+						<span>聊天天窗口界口界面信息</span><img src="./images/1.jpg" alt="">
+				   </li>
+				
+			</ul>
+		</div>
+		<div class="bottom clearfix">
+			<img src="./images/1.jpg" alt="" id="avator"><input type="text" name="" id="msg"/ autofocus><button id="send">发送</button>
+		</div>
+	</div>
+	<script>
+		var avator=document.getElementById("avator")
+		var msg=document.getElementById("msg")
+		var send=document.getElementById("send")
+		var container=document.getElementById("msg-container")
+
+		var config={
+			"send":{
+				align:"right",
+				avator:"1.jpg"
+			},
+			"receive":{
+				align:"left",
+				avator:"2.jpg"
+			}
+		}
+		var role="send"
+
+		avator.onclick=function(){
+			role=role=="send"?"receive":"send";
+			this.src="./images/"+config[role].avator
+		}
+		send.onclick=sendMsg
+		
+		msg.onkeypress=function(e){
+			if(e.key=="Enter"){
+				sendMsg()
+			}
+		}
+		
+		function sendMsg(){
+			if(msg.value=="") return;
+			var tmg=document.createElement("li")
+			tmg.className=config[role].align
+			tmg.innerHTML='<span>'+msg.value+'</span><img src="./images/'+config[role].avator+'" alt="">'
+			container.appendChild(tmg)
+			msg.value=""
+			container.scrollTop=container.scrollHeight
+		}
+
+		
+	</script>
+</body>
+</html>
