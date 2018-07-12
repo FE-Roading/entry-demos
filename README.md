@@ -20,6 +20,7 @@
 1. [聊天窗口模仿](https://coman-ife.github.io/Demos/聊天窗口模仿)
 1. [轮播图](https://coman-ife.github.io/Demos/轮播图)
 1. [鼠标进入方向案例](https://coman-ife.github.io/Demos/鼠标进入方向案例)
+1. [Ajax-天气查询](https://coman-ife.github.io/Demos/Ajax-天气查询)
 1. [2D切割轮播图](https://coman-ife.github.io/Demos/2D切割轮播图)
 1. [餐厅案例](https://coman-ife.github.io/Baidu-IFE//2018/60/)
 1. [报表编辑展示](https://coman-ife.github.io/Baidu-IFE//2018/57/)

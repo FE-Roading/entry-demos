@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX</title>
+    <style>
+        ul{
+            list-style: none;
+        }
+        .wrapper{
+            width: 600px;
+            margin:100px auto;
+        }
+        h2{
+            text-align: center;
+            font-size: 30px;
+        }
+        .info-input{
+            text-align: center;            
+        }
+        .info-input input{
+            height: 30px;
+            font-size: 20px;
+            outline: none;
+            text-indent: 5px;
+        }
+        .info-input #search{
+            border-radius: 5px;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+       <h2>全国天气查询</h2>
+        <div class="info-input">
+            <input type="text" id="city">
+            <input type="button" value="查询" id="search">
+        </div>
+        <div class="content">
+            <ul id="container">
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <script src="./jquery-1.11.1.min.js"></script>
+    <script>
+
+        $("#city").bind("keypress",function(e){
+            if(e.key=="Enter"){
+                search()
+            }
+        })
+        $("#search").bind("click",search)
+        function search(){
+            var city=$.trim($("#city").val())
+            if(city!=""){
+                $.ajax({
+                    type:"GET",
+                    dataType: "jsonp",
+                    url:"http://v.juhe.cn/weather/index",
+                    data:{
+                        "cityname":city,
+                        "dtype":"json",
+                        "format":"",
+                        "key":"2f275626a3f771bdb3599f67eb78843b"
+                    },
+                    success:function(weather){
+                        if(weather.resultcode=="200"){
+                            var detail=weather.result
+                            var tmp=`
+                            <li>
+                            <h3>${detail.today.city}</h3>
+                            <h4>${detail.today.date_y}</h4>
+                            <div>穿衣指南：${detail.today.dressing_advice}</div>
+                            <div>天气类型：${detail.today.weather}</div>                    
+                            </li>                            
+                            ` 
+                            $("#container").html(tmp)
+                        }else{
+                            $("#container").html(city+"天气请求失败，错误代码："+weather.error_code+",错误原因为："+weather.reason)
+                        }
+                        console.log(weather)
+                    },
+                    error:function(error){
+                        $("#container").html(city+"天气请求失败，错误代码："+error.error_code+",错误原因为："+error.reason)
+                        console.log(error)
+                    }
+                })
+            }
+        }
+        $(function(){
+            $("#city").val("北京")
+            search()
+
+        })
+    </script>
+</body>
+</html>
