@@ -28,5 +28,5 @@
 1. [弹出层](file:///E:/Practices/FE/GitHub/Baidu-IFE/2017/yaoyao/task6/index.html)
 1. [表格操作](https://coman-ife.github.io/Baidu-IFE/2017/yaoyao/task7/index.html)
 1. [JS树操作](https://coman-ife.github.io/Baidu-IFE/2017/binbin/task9/)
-
+1. [flybird](https://coman-ife.github.io/Demos/flybird)
 

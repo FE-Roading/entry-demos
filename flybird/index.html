@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fly-bird</title>
+    <style>
+        .wrapper {
+            width: 800px;
+            margin: 100px auto;
+        }
+
+        #flybird {
+            width: 800px;
+            height: 600px;
+            background: url("./images/sky.png");
+            position: relative;
+            overflow: hidden;
+        }
+
+        #bird {
+            width: 34px;
+            height: 25px;
+            background: url('./images/birds.png') -8px -10px no-repeat;
+            position: absolute;
+            top: 300px;
+            left: 100px;
+        }
+
+        .upipe {
+            width: 52px;
+            background: url('./images/pipe2.png') center bottom no-repeat;
+            top: 0;
+            position: absolute;
+        }
+
+        .bpipe {
+            width: 52px;
+            background: url('./images/pipe1.png') center top no-repeat;
+            bottom: 0;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="flybird">
+            <div id="bird">
+            </div>
+        </div>
+    </div>
+    <script>
+        var birdEle = document.getElementById("bird")
+        var flybird = document.getElementById("flybird")
+        var bird = null
+        var bgPos = 0;
+
+        init()
+        run()
+
+
+        function init() {
+            bird = {
+                speedX: 5,
+                speedY: 0,
+                x: birdEle.offsetLeft,
+                y: birdEle.offsetTop
+            }
+            for (var i = 0; i < 8; i++) {
+                createPipe()
+            }
+
+        }
+
+        function run() {
+            var bg = 0
+            bird.runTimer = setInterval(bgMove, 30)
+
+        }
+        flybird.onclick = function () {
+            bird.speedY = -10
+        }
+
+
+        function bgMove() {
+            bird.speedY++
+            bgPos = bgPos + bird.speedX
+
+            flybird.style.backgroundPositionX = -bgPos + "px"
+
+            if (birdEle.offsetTop <= 0 || birdEle.offsetTop + birdEle.offsetHeight >= 600) {
+                birdEle.style.top = birdEle.offsetTop <= 0 ? "0px" : 600 - birdEle.offsetHeight + "px";
+                gameOver()
+            }
+            birdEle.style.top = birdEle.offsetTop + bird.speedY + "px"
+            pipeMove()
+
+        }
+        function pipeMove() {
+            var ps = 3
+            var delNum = 0
+            var pips = document.getElementsByClassName("pipe")
+            for (var i = 0; i < pips.length; i++) {
+                var temp = pips[i].offsetLeft - ps
+                if (pips[i].classList.value.indexOf("upipe") != -1 && birdEle.offsetLeft + 34 > temp && birdEle.offsetLeft < (temp + 52) && (birdEle.offsetTop < pips[i].offsetHeight)) {
+                    console.log("gameover")
+                    gameOver()
+                    return
+                }
+                if (pips[i].classList.value.indexOf("bpipe") != -1 && birdEle.offsetLeft + 34 > temp && birdEle.offsetLeft < (temp + 52) && (birdEle.offsetTop > pips[i].offsetTop)) {
+                    gameOver()
+                    return
+                }
+                pips[i].style.left = temp + "px";
+                if (pips[i].offsetLeft < -52) {
+                    flybird.removeChild(pips[i])
+                    delNum++
+                }
+            }
+            for (var i = 0; i < delNum; i = +2) {
+                createPipe()
+            }
+        }
+        function gameOver() {
+            clearInterval(bird.runTimer)
+        }
+
+        function createPipe() {
+            var pipeGap = 155;
+            var upPipeLen = parseInt(Math.random() * 100 + 200)
+            var downPipeLen = 600 - upPipeLen - 100
+            var pips = document.getElementsByClassName("pipe")
+
+            if (pips.length / 2 > (flybird.offsetWidth / pipeGap + 2)) return
+
+            var upPipe = document.createElement("div")
+            var downPipe = document.createElement("div")
+
+            if (pips.length == 0) {
+                upPipe.style.left = "300px"
+                downPipe.style.left = "300px"
+            } else {
+                upPipe.style.left = pips[pips.length - 1].offsetLeft + pipeGap + "px";
+                downPipe.style.left = pips[pips.length - 1].offsetLeft + pipeGap + "px";
+            }
+            upPipe.className = "upipe pipe"
+            upPipe.style.height = upPipeLen + "px"
+
+            downPipe.className = "bpipe pipe"
+            downPipe.style.height = downPipeLen + "px"
+
+            flybird.appendChild(upPipe)
+            flybird.appendChild(downPipe)
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
