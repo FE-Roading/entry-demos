@@ -1,4 +1,4 @@
-.section{
+.section, body, html{
     min-height: 600px;
     min-width: 1000px;
 }
@@ -282,10 +282,18 @@
     transform: translateX(-50%);
     z-index: -1;
 }
-.section5 .s5-mouse1,.section5 .s5-mouse2{
+.overflow{
+    position: absolute;
+    top: 0;
+    left: 0;
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+}
+.section5 .s5-mouse1,.section5  .s5-mouse2{
     position: absolute;
     right: 20%;
-    bottom: 200px;
+    bottom: 200px;   
 }
 .section5 .s5-mouse2{
     display: none;
