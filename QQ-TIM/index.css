@@ -1,0 +1,578 @@
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{
+    margin:0;padding:0;
+    font-family:Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", "Microsoft YaHei", STXihei, STHeiti, Heiti, SimSun, sans-serif; font-size:100%;
+    box-sizing: border-box;
+}
+html,body{
+    color:#333
+}
+body{
+    background:#fff;overflow-x: hidden;
+}
+ul,ol,li{
+    list-style:none;
+}
+a:link, a:visited{
+    color:#333; text-decoration:none;
+}
+a:hover{
+    color:#12b7f5;
+}
+img{
+    border:none;
+}
+em{
+    font-style:normal;
+}
+h1,h2,h3,h4,h5{
+    font-weight:normal;
+}
+.clearfloat:after{
+    content:'.';
+    display:block;
+    clear: both;
+}
+.clearfloat{
+    zoom:1;
+}
+
+/* topbar 栏目 */
+.topbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+}
+.topbar .tp-container{
+    max-width: 1170px;
+    min-width: 980px;
+    width: 80%;   
+    height: 75px;  
+    margin: 0 auto;
+    position: relative;    
+}
+.topbar .logo{    
+    float: left;
+    width: 106px;
+    height: 76px;
+    background: url("./images/imlogo_b.png")   no-repeat left 15px;
+    font-size: 0;    
+}
+.topbar .topside{
+    float: left;
+    margin-left: 18px;
+}
+.topbar .topside li{
+    float: left;
+    margin-left: 20px;    
+}
+.topbar .topside li.top:hover{
+    background-color:#12B7F5;
+}
+.topbar .topside li:hover a{
+    color:#333;
+}
+.topbar .topside li a{
+    padding: 0 20px;
+    line-height: 75px;
+    font-size: 1.125em;
+    display: block;
+}
+.topbar .toptool{
+    float: right;
+    width: 320px;
+    font-size: 0.875em;
+}
+.topbar .toptool a{
+    display: block;
+    color: #333;
+}
+
+.topbar .toptool .topReg{
+    float: left;
+    line-height: 75px;
+    display: block;
+    font-size: 0;
+    height: 39px;
+    width: 96px;
+    margin-top: 18px;
+    background: url("./images/icons.png") 0 -244px no-repeat;    
+}
+.topbar .toptool .topReg:hover{
+    background-position:0 -284px; 
+}
+.topbar .toptool .tools{
+    float: right;
+    height: 40px;
+    margin-top: 6px;
+}
+.topbar .toptool .tools li{
+    float: left;
+    margin-left: 30px;
+    line-height: 40px;
+}
+
+.topbar .toptool .flashData{
+    float: right;
+    line-height: 17px;    
+}
+.topbar .toptool .flashData:hover{
+    text-decoration: underline;
+}
+
+/* topbanner 栏 */
+
+.topbanner{
+    width: 100%;
+    height: 778px;
+    position: relative;
+}
+.topbanner .banners{    
+    width: 100%;    
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.topbanner .banner{
+    position: relative;    
+    height: 100%;  
+    width: 100%;    
+}
+.topbanner .banner .b-content{
+    height: 100%;  
+    width: 100%;
+    max-width: 1900px;
+    min-width: 960px;
+}
+.topbanner .banners .b-pc{
+    background:url("./images/pcqq_bg.jpg") center center no-repeat;
+    background-size: cover;
+    display: none;
+}
+.topbanner .banners .b-pc .b1-title{
+    margin: 0 auto;
+    padding: 6% 0 2%;
+    width: 807px;
+    font-size: 0;
+    letter-spacing: 0;
+}
+.topbanner .banners .b-pc .b1-title-text{
+    float: left;
+    height: 116px;
+    width: 459px;
+    background:transparent  url("./images/title-text-1920b.png") center center no-repeat;
+}
+.topbanner .banners .b-pc .b1-download{
+    float: right;
+    height: 120px;
+    width: 347px;
+    background: transparent url("./images/title-button-b.png") center center no-repeat;
+}
+.topbanner .banners .b-pc .b1-pic{
+    margin: 0 auto;    
+}
+.topbanner .banners .b-tim{
+    position: absolute;
+    background:url("./images/tim_bg_1.jpg") center center no-repeat;
+    background-size: cover;
+}
+.topbanner .banners .b-tim .b-content{
+    padding-top: 6%;
+}
+
+.topbanner .banners .b-tim .b2-logo{
+    width: 297px;
+    height: 167px;
+    background: transparent url("./images/logo.png") center center no-repeat;
+    margin: 0 auto;
+}
+.topbanner .banners .b-tim .b2-download{
+    display: block;
+    height: 72px;
+    width: 328px;
+    background: transparent url("./images/btn.png") center center no-repeat;
+    margin: 2% auto 4%;
+    font-size: 0;
+}
+.topbanner .banners .b-tim .b2-features{
+    width: 812px;
+    height: 147px;
+    background: url("./images/icon.png") center top no-repeat;
+    margin: 0 auto;
+}
+.topbanner .banners .b-tim .b2-doc{
+    width: 100%;  
+}
+.topbanner .indicators{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 52px;
+    width: 100%;
+    background: url("./images/linearbot.png") left top repeat-x;
+    text-align: center;
+    font-size: 0;
+    letter-spacing: 0;    
+}
+.topbanner .indicators li{
+    width: 12px;
+    height: 12px;
+    background: url("./images/nav.png") center center no-repeat;
+    margin-right: 25px;
+    display: inline-block;
+    margin-top: 5px;
+    cursor: pointer;
+    
+}
+.topbanner .indicators li.cur{
+    background-image: url("./images/navcur.png");
+}
+h1{
+    text-indent: -100%;
+    width: 100%;
+    padding-top: 280px;
+    background:  #fff url("./images/brand.png") center center no-repeat;
+}
+.qfigure{
+    width: 100%;   
+    background: #fff;
+    position: relative;
+}
+.qfigure .con-pic{
+    width: 100%;
+    height: 600px;
+}
+.qfigure .q-con{
+    position: relative;
+    width: 960px;
+    height: 584px;
+    margin: 0 auto;
+    font-size: 18px;
+    letter-spacing: 0.12em;
+}
+.qfigure .q-con .q-rdetail{
+    position: absolute;
+    right: 7px;
+    top: 115px;
+    width: 487px;
+}
+.qfigure .q-con .q-ldetail{
+    position: absolute;
+    left: 7px;
+    top: 115px;
+    width: 450px;
+}
+.qfigure h2{
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    padding-top: 135px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+.qfigure p{
+    width: 100%;
+    margin-bottom: 12px;
+    line-height: 25px;    
+    opacity: 0.6;
+}
+.qfigure .q-ldetail p{
+    width: 90%;
+    padding-left: 5px;
+}
+.qfigure .q-rdetail p{
+    text-align: right;
+}
+
+.qfigure p a:link,.qfigure p a:visited{
+    color: #12b7f5;
+}
+
+.qfigure .figs{
+    box-sizing: content-box;
+    width: 100%;
+    padding-top: 44px;
+    min-height: 77px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.qfigure .figs li{
+    float: right;   
+    padding: 58px 0 0;
+    color: #a0a0a0;
+    font-size: 14px;
+    text-align: center;
+}
+.qfigure .q-rdetail li{
+    border-left: 1px solid #e9e9e9;    
+}
+.qfigure .q-ldetail li{
+    float: left;
+    border-right: 1px solid #e9e9e9;  
+}
+
+.qfigure .q-rdetail li:nth-child(3){
+    text-align: center;
+    border-left: none;
+}
+
+.qf1 .con-pic{
+    background: url("./images/fisrtbg.jpg");
+}
+.qf1 .qf-pic{
+    position: absolute;
+    bottom: 0;
+    left: -32px;
+    width: 664px;    
+}
+.qf1 h2{
+    background-image:  url("./images/qcall_txt.png");
+}
+.qf1 .figs{
+    background-image:  url("./images/qcall_figs.png");
+    background-position: 160px 41px; 
+}
+.qf1 li:nth-child(1){
+    width: 120px;
+}
+.qf1 li:nth-child(2){
+    width: 120px;
+    padding-left: 19px;
+}
+.qf1 li:nth-child(3){
+    width: 120px;
+}
+
+.qf2 .con-pic{
+    background: url("./images/avd.jpg");
+}
+.qf2 h2{
+    background-image: url("./images/txt.png");
+}
+.qf2 .qf-pic{
+    position: absolute;
+    right: -100px;
+    bottom: 104px;
+    width: 597px;
+    height: 330px;
+}
+.qf2 .figs{
+    background-image: url("./images/qfile_figs.png");
+    background-position: 7px 41px;
+}
+.qf2 li:nth-child(1){
+    width: 94px;
+    text-indent: 12px;
+    text-align: left;
+}
+.qf2 li:nth-child(2){
+    width: 112px;
+}
+.qf2 li:nth-child(3){
+    width: 108px;
+    border: none;
+}
+
+.qf3 .con-pic{
+    background: url("./images/blog.jpg");
+}
+.qf3 h2{
+    background-image: url("./images/qblog_txt.png");
+}
+.qf3 .figs{
+    background-image: url("./images/qblog_figs.png");
+    background-position: 200px 41px;
+}
+.qf3 .figs li:nth-child(1) {
+    width: 100px;
+}
+.qf3 .figs li:nth-child(2) {
+    width: 105px;
+}
+.qf3 .figs li:nth-child(3){
+    width: 106px;
+}
+.qf3 .qf-pic{
+    position: absolute;
+    bottom: 0;
+    left: 88px;
+}
+
+.qf3 .qblogWrap{
+    position: absolute;
+    left: 0;
+    bottom: 139px;
+}
+.qf3 .qblogWrap li{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    bottom: 139px;
+    bottom: 0;
+    animation: zoomIn 0.2s cubic-bezier(0, .25, .08, 1) 0.4s backwards;
+}
+.qf3 .qblogWrap li:nth-child(1){
+    left: -5px;
+    background: url("./images/qblog_fig1.png") no-repeat 0 0;
+    
+}
+.qf3 .qblogWrap li:nth-child(2){
+    left: 187px;
+    background: url("./images/qblog_fig2.png") no-repeat 0 0;
+}
+.qf3 .qblogWrap li:nth-child(3){
+    left: 380px;
+    background: url("./images/qblog_fig3.png") no-repeat 0 0;
+}
+@keyframes zoomIn{
+    0% {
+        transform: scale(0);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.foot{
+    width: 100%;
+    height: 348px;
+    padding-top: 34px;
+    background: #2a2a2a;
+    font-size: 0.75em;
+}
+.foot-con{
+    width: 960px;
+    height: 205px;
+    margin: 0 auto;
+    position: relative;
+}
+.qmaps .plats{
+    width: 960px;
+    height: 205px;
+    margin: 0 auto;
+    position: relative;   
+
+    float: left;
+    width: 510px;
+    padding-left: 8px;
+    
+}
+.qmaps .plats h3{
+    height: 50px;
+    color: #666;
+    font-size: 14px;
+}
+.qmaps .plats a{
+    float: left;
+    padding-top: 65px;
+    background: transparent url(//sqimg.qq.com/qq_product_operations/im/2015/plats1.png) no-repeat 0 0;
+    text-align: center;
+    font-size: 14px;
+}
+.plats a.plmb {
+    width: 80px;
+    margin-right: 35px;
+    background-position: 0px 0;
+}
+.plats a.plmb:hover{
+    background-position: 0px 0;
+}
+.plats a.plpc {
+    width: 80px;
+    margin-right: 30px;
+    background-position: -105px 0;
+}
+.plats a.plmac {
+    width: 84px;
+    margin-right: 30px;
+    background-position: -210px 0;
+}
+.plats a.plpad {
+    width: 76px;
+    background-position: -326px 0;
+}
+.foot a:link, .foot a:visited{
+    color: #979797;
+}
+.foot a:hover{
+    background-position-y: -93px!important;
+    color: #12b7f5;
+}
+.map {
+    float: left;
+}
+.map h3 {
+    height: 25px;
+    color: #666;
+    font-size: 14px;
+}
+.map li {
+    line-height: 22px;
+}
+.qac {
+    width: 185px;
+}
+.qfaq {
+    width: 175px;
+}
+.qlink {
+    width: 80px;
+}
+.sub-list {
+    position: absolute;
+    right: -55px;
+    top: 25px;
+}
+.copyright {
+    clear: both;
+    width: 960px;
+    margin: 0 auto;
+    padding-top: 16px;
+    border-top: 1px solid #666;
+    line-height: 17px;
+    text-align: center;
+    color: #666;
+}
+#overlay{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.6;
+    filter: Alpha(opacity=60);
+}
+#flashDiv{
+    position: absolute;
+    left: 50%;
+    top: 47px;
+    width: 978px;
+    height: 721px;
+    margin: 0 0 0 -489px;    
+    z-index: 10000;
+    position: fixed;
+    display: none;
+}
+.flashBar {
+    float: right;
+    width: 67px;
+}
+.flashBar a.close {
+    background-position: 14px 14px;
+}
+.flashBar a {
+    display: block;
+    width: 67px;
+    height: 0;
+    overflow: hidden;
+    padding-top: 67px;
+    background: #000 url("./images/flahicons.png") no-repeat 0 0;
+    border-bottom: 1px solid #333;
+}
