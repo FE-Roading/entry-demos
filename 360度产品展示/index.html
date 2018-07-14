@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>360度产品展示</title>
+	<link href="./index.css" rel="stylesheet">
+</head>
+
+<body>
+	<div class="container">
+		<div id="circlr">
+			<div id="loader"></div>
+		</div>
+	</div>
+	<script>
+		var circlr = document.getElementById("circlr");
+		for (var i = 1; i <= 71; i++) {
+			var pic = document.createElement("img");
+			circlr.appendChild(pic);
+			pic.setAttribute("data-src", "./images/" + i + ".png");
+
+		}
+	</script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/circlr.min.js"></script>
+	<script type="text/javascript">
+		var crl = circlr('circlr', {
+			scroll: true,
+			loader: 'loader',
+		});
+	</script>
+</body>
+
+</html>
