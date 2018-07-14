@@ -2,7 +2,7 @@
 
 ## 综合案例
 
-1. [商城宣传页面](https://coman-ife.github.io/Demos/商城宣传动画/)
+1. [商城宣传页面](https://coman-ife.github.io/Demos/商城宣传页面/)
 
 ## 页面布局
 
