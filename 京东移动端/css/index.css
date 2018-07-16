@@ -1,0 +1,221 @@
+.topbar{
+    height: 40px;
+    width: 100%;
+    max-width: 640px;
+    background-color: rgba(233, 35, 34, 0);
+    position: fixed;
+    z-index: 99;  
+}
+.tb-icon{
+    position: absolute;
+    display: block;
+    height: 30px;
+    width: 56px;
+    background: url("./images/jd-sprites.png") 0 -103px;
+    background-size: 200px 200px;
+    left:10px;
+    top: 5px;
+}
+.tb-searchBox{
+    width: 100%;
+    height: 100%;
+    padding:5px 56px 5px 76px;
+}
+.tb-search{
+    width: 100%;
+    height: 30px;
+    border-radius: 15px;
+    border:none;
+    text-indent: 30px;
+}
+.tb-searchBox::before{
+    content: "";
+    display: block;    
+    height: 27px;
+    width: 23px;
+    position: absolute;
+    left: 80px;
+    top:9px;
+    z-index: 1;
+    background: url("../images/jd-sprites.png") -56px -108px;
+    background-size: 200px 200px;
+}
+.tb-login{
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    color: #fff;
+}
+.banner{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.banner .imgs{
+    width: 1000%;
+    position: relative;
+    left: -100%;
+}
+.banner .imgs li{
+    float: left;
+    width:10%;
+}
+.banner .imgs img{
+    vertical-align: middle;
+    width: 100%;
+}
+.banner .indicators{
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 5px;
+}
+.banner .indicators li{
+    box-sizing: border-box;
+    float: left;
+    height: 6px;
+    width: 6px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    margin-right:10px;    
+    cursor: pointer;
+}
+.banner .indicators li:hover,.banner .indicators li.active{
+    border: none;
+    background-color: #fff;
+}
+.banner .indicators li:last-child{
+    margin-right: 0;
+}
+.nav ul{
+    padding:10px 0;
+}
+.nav li{
+    float: left;
+    width: 25%;
+    text-align:center;
+}
+.nav li img{
+    width: 50px;
+    vertical-align: middle;
+}
+.nav li p{
+    line-height:25px;
+}
+.products{
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color:  #eee;
+    padding-top: 10px;
+}
+.products .title{
+    width: 100%;
+    line-height: 30px;
+    height: 30px;
+    padding-left: 30px;
+    position: relative;
+    background-color: #fff;
+    margin: 0;
+}
+.products .title::before{
+    content: "";
+    height: 20px;
+    width:3px;
+    background-color:#e92322;
+    position: absolute;
+    left: 15px;
+    top: 5px;
+}
+.products .items{
+    width: 100%;
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    background-color: #fff;
+}
+.products .items a{
+    width: 50%;
+    box-sizing: border-box;
+    overflow:hidden;
+}
+.products .items img{
+    width: 100%;
+    vertical-align: middle;
+}
+.products .items .fl:nth-child(2) {
+    border-left:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    height: 50%;
+}
+.products .items .fl:nth-child(3) {
+    border-left:1px solid #ccc;
+    height: 50%;
+}
+
+.products .items .fr:nth-child(2) {
+    border-right:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    height: 50%;
+}
+.products .items .fr:nth-child(3) {
+    border-right:1px solid #ccc;
+    height: 50%;
+}
+.miaosha .title h3{
+    margin: 0;
+}
+.miaosha .title::before{
+    background-color:transparent;
+    width: 16px;
+    height: 20px;
+    background: url("./uploads/seckill-icon.png");
+    background-size: 16px 20px;
+    margin-top: -2px;
+    margin-left: -8px;
+}
+.miaosha .title .clock{
+    margin-left: 11px;
+}
+.miaosha .title .clock span{
+    width: 13px;
+    height: 18px;
+    display: inline-block;
+    margin-right: 2px;
+    line-height: 18px;
+    color: #fff;
+    background-color: #000;
+    text-align: center;
+}
+.miaosha .clock span:nth-child(3),.miaosha .clock span:nth-child(6){
+    background-color: transparent;
+    color: #000;
+}
+.miaosha .title .more{
+    padding-right: 62px;
+}
+.miaosha .items{
+    border: none;
+    padding: 20px;
+}
+.miaosha .items li{
+   width: 33.33%;
+   float: left;
+   text-align: center;
+}
+.miaosha .items li p:first-of-type{
+    text-decoration:line-through;
+}
+.miaosha .items img{
+    width: 60%;
+    display: inline-block;
+}
+
+
+
+
+
+

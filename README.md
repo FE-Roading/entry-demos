@@ -3,6 +3,7 @@
 ## 综合案例
 
 1. [商城宣传页面](https://coman-ife.github.io/Demos/商城宣传页面/)
+1. [京东移动端](https://coman-ife.github.io/Demos/京东移动端/)
 1. [QQ-TIM](https://coman-ife.github.io/Demos/QQ-TIM/)
 1. [360度产品展示](https://coman-ife.github.io/Demos/360度产品展示/)
 

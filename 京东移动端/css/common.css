@@ -1,0 +1,21 @@
+.commonNav{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 640px;
+    min-width: 320px;
+    background: #fff;
+}
+.commonNav li{
+    float: left;
+    width: 20%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.commonNav li a{
+    display: block;
+    width: 100%;
+}
+.commonNav li img{
+    width: 100%;
+}
