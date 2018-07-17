@@ -1,0 +1,109 @@
+body{
+    font-family: "Microsoft YaHei","微软雅黑",Tahoma,Helvetica;
+    font-size: 14px;
+}
+@font-face {
+    font-family: "wjs";
+    src: url("../fonts/MiFie-Web-Font.eot") format("embedded-opentype"),
+        url("../fonts/MiFie-Web-Font.svg") format("svg"),
+        url("../fonts/MiFie-Web-Font.ttf") format("truetype"),
+        url("../fonts/MiFie-Web-Font.woff") format("woff");
+}
+a{
+    text-decoration: none;
+    color: #333;
+}
+a:hover,a:active,a:visited,a:focus{
+    text-decoration: none;
+    color: #333;
+}
+
+i{
+    font-style: normal;
+}
+.icon{
+    font-family: "wjs";
+}
+/*手机图标对应的编码*/
+.icon_phone::before{
+    content: "\e908";
+}
+/*电话图标对应的编码*/
+.icon_tel::before{
+    content: "\e909";
+    font-size: 14px;
+}
+/*wjs logo*/
+.icon_logo::before{
+    content: "\e920";
+}
+/*wjs 文本*/
+.icon_text::before{
+    content: "\e93e";
+}
+.icon_new01::before{
+    content: "\e90e";
+}
+.icon_new02::before{
+    content: "\e90f";
+}
+.icon_new03::before{
+    content: "\e910";
+}
+.icon_new04::before{
+    content: "\e911";
+}
+.icon_partner01::before{
+    content:"\e946";
+}
+.icon_partner02::before{
+    content: "\e92f";
+}
+.icon_partner03::before{
+    content: "\e92e";
+}
+.icon_partner04::before{
+    content: "\e92a";
+}
+.icon_partner05::before{
+    content: "\e929";
+}
+.icon_partner06::before{
+    content: "\e931";
+}
+.icon_partner07::before{
+    content: "\e92c";
+}
+.icon_partner08::before{
+    content: "\e92b";
+}
+.icon_partner09::before{
+    content: "\e92d";
+}
+.iconn_E903::before{
+    content: "\e903";
+}
+.icon_E906::before{
+    content: "\e906";
+}
+.icon_E905::before{
+    content: "\e905";
+}
+.icon_E907::before{
+    content: "\e907";
+}
+.icon_E901::before{
+    content: "\e901";
+}
+.icon_E900::before{
+    content: "\e900";
+}
+.icon_E904::before{
+    content: "\e904";
+}
+.icon_E902::before{
+    content: "\e902";
+}
+.icon_E906::before{
+    content: "\e906";
+}
