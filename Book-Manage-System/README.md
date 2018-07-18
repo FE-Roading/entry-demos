@@ -6,3 +6,5 @@
 3. v3：在API的基础上增加RESTful API的方式获取和修改数据；
 具体的接口文档信息，请查收POSTMAN导出的JSON文件。
 运行服务器后，http://localhost:post为V3版的主页，http://localhost:post/index为V2版的主页
+
+源代码地址：https://github.com/coman-ife/Demos/tree/master/Book-Manage-System
