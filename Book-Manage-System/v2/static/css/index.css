@@ -1,0 +1,18 @@
+.wrapper{
+    min-width: 400px;
+    max-width: 600px;
+    margin:0 auto;
+    text-align: center;
+}
+.content{
+    margin: 0 auto;
+}
+table td{
+    padding: 5px 10px;
+}
+.book-desc{
+    text-align: left;
+}
+table td:last-of-type a:first-of-type{
+    margin-right: 6px;
+}

@@ -1,0 +1,70 @@
+.wrapper{
+    min-width: 400px;
+    max-width: 600px;
+    margin:0 auto;
+    text-align: center;
+}
+.content{
+    margin: 0 auto;
+}
+table td{
+    padding: 5px 10px;
+}
+.book-desc{
+    text-align: left;
+}
+table td:last-of-type button:first-of-type{
+    margin-right: 6px;
+}
+#info{
+    display: none;
+    width:200px;
+    height: 40px;
+    position: absolute;
+    top: 65px;
+    left: 50%;
+    margin-left: -50px;
+    font-size: 25px;
+    border-radius: 5px;
+    text-align: left;
+    overflow: hidden;
+    z-index: 99;
+}
+#info.warning{
+    display: block;
+    background-color: indianred;
+    color:#fff;
+}
+#info.success{
+    display: block;
+    background-color: limegreen;
+    color:#fff;
+}
+#info.success i{
+    background:url("/static/images/success.png") no-repeat;
+    background-size: cover;
+}
+#info.warning i{
+    background:url("/static/images/warning.png") no-repeat;
+    background-size: cover;
+}
+#info i{
+    height: 25px;
+    width: 25px;
+    left: 8px;
+    position: absolute;
+    top: 5px;
+}
+#info #info-msg{
+    position: relative;
+    line-height: 40px;
+    padding-left: 36px;
+}
+
+#addFormCon{
+    display: none;
+    text-align: center;
+}
+#addFormCon form{
+    margin-top: 20px;
+}

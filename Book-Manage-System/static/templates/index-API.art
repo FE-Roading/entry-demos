@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/css/index.css">   
+    <title>图书管理系统</title>       
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/dialog.js"></script>
+    <script src="/static/js/index.js"></script>
+    
+</head>
+<body>
+    <div class="wrapper">
+        <h1>图书管理系统</h1>
+        <table border="1"  cellspacing="0" class="content">
+            <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>作者</th>
+                <th>分类</th>
+                <th>描述</th>
+                <th>操作</th>
+            </tr>
+            <tbody id="booksContainer">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3"><a href="javascript:;" onclick="init()">数据更新</a></d><td colspan="3"><a href="javascript:;" onclick="addBook()">添加图书</a></d>
+                </tr>    
+            </tfoot>
+        </table>
+        <div id="info" class="">
+            <i id="info-icon"></i>
+            <span id="info-msg"></span>
+        </div>
+        <div id="addFormCon">
+            <form id="addBookForm">
+                <input type="hidden" name="id">
+                名称：<input type="text" name="name"><br>
+                作者：<input type="text" name="author"><br>
+                分类：<input type="text" name="category"><br>
+                描述：<input type="text" name="description"><br>
+                <input type="button" value="提交">
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

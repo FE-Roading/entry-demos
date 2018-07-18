@@ -1,6 +1,10 @@
 # [Demos](https://coman-ife.github.io/Demos/)
 
-## 综合案例
+## 综合实例
+
+1. [图书管理系统](https://coman-ife.github.io/Demos/Book-Manage-System)
+
+## 综合页面
 
 1. [商城宣传页面](https://coman-ife.github.io/Demos/商城宣传页面/)
 1. [微金所首页](https://coman-ife.github.io/Demos/微金所首页/)

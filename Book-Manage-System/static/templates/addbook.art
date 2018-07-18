@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <title>添加图书</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>添加图书</h1>
+        <div class="content">
+            <form action="/addbook" method="POST">
+                <label for="name">名称：</label><input type="text" id="name" name="name" ><br/>
+                <label for="author">作者：</label><input type="text" id="author" name="author" ><br/>
+                <label for="category">分类：</label><input type="text" id="category" name="category" ><br/>
+                <label for="description">描述：</label><textarea name="description" id="description" cols="22" rows="5"></textarea><br/>
+                <input type="submit" value="提交">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
