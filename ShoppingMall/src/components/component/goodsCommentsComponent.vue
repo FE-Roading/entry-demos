@@ -4,7 +4,7 @@
             <li v-for="(item,index) in comments" :key="index">
                 <div class="title">
                     <span>{{item.userName}}</span>
-                    <star class="star" :rate="item.rate"></star>
+                    <star class="star" :rate="item.star | rateFormat"></star>
                     <span>{{item.createAt | dateFormat}}</span>
                 </div>
                 <div class="gc-body" v-text="item.content">
@@ -53,6 +53,9 @@
         filters:{
             dateFormat(str){
                 return str.split("T")[0]
+            },
+            rateFormat(rate){
+                return rate?rate:Math.ceil(Math.random()*10)
             }
         }
     }

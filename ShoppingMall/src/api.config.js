@@ -1,6 +1,7 @@
 // easy-mock api的地址现已放置到本地
 // const BASEURL = 'https://www.easy-mock.com/mock/5b5ddb639b54da5dcc7d1881/'
 const LOCALURL = 'http://shopping.onlyoup.top/api/'
+// const LOCALURL = 'http://192.168.0.103:3000/'
 
 const URL = {
     url: LOCALURL,

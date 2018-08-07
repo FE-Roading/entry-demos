@@ -11,11 +11,12 @@ const util = require('util')
 const verify = util.promisify(jwt.verify)
 const config=require('./config/config.js')
 const errorHandler=require("./service/errorHandler.js")
-const static=require('koa-static')
-const path=require('path')
 
 let app=new Koa()
-app.use(static(__dirname+'/static'))
+app.use(cors({
+        credentials: true, 
+        origin: 'http://192.168.0.103:8080'
+    }))
     .use(bodyParser())
     .use(router.routes())
     .use(router.allowedMethods())
@@ -26,6 +27,6 @@ app.use(static(__dirname+'/static'))
     initSchemas()
 })()
 
-app.listen(7000,()=>{
+app.listen(3000,()=>{
     console.log("running at 3000!")
 })
