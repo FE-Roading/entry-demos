@@ -2,7 +2,7 @@
 
 ## 综合实例
 
-1. [移动端购物](http://shopping.onlyoup.top/),[源码](https://coman-ife.github.io/Demos/ShoppingMall)
+1. [移动端购物](http://shopping.onlyoup.top/),[源码](https://github.com/coman-ife/Demos/tree/master/ShoppingMall)
 1. [京东金融](https://coman-ife.github.io/Demos/JDFinance/dist/)
 1. [图书管理系统](https://coman-ife.github.io/Demos/Book-Manage-System)
 
