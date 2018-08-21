@@ -52,7 +52,8 @@ html,body,.wrapper{
    float: left;   
    overflow: hidden;
    display: flex;
-   flex-direction: column;   
+   flex-direction: column;
+   padding-bottom: 65px;
 }
 .cb-left ul{
     position: relative;
@@ -79,6 +80,7 @@ html,body,.wrapper{
 }
 .cb-right{
     height: 100%;
+    overflow: auto;
     margin-left: 100px;
     background-color: #fff;
 }
