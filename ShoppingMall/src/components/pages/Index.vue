@@ -1,21 +1,19 @@
 <template>
-  <div id="app">
-    <searchbar>      
-         <img src="@/assets/logo.png" class="index-logo" v-if="login">
-         <a href="/login" class="index-login" v-else>登</a>
-    </searchbar>
+  <div>
     <div class="swipe-area">
         <van-swipe :autoplay="3000">
-            <van-swipe-item v-for="img in bannerPics" :key="img.url">
-                <img v-lazy="img.image" alt="" srcset="">
+            <van-swipe-item v-for="item in bannerPics" :key="item.image">
+                <router-link :to="{name:'goods',query:{goodsId:item.goodsId}}">
+                    <img v-lazy="item.image" alt="" >
+                </router-link>
             </van-swipe-item>
         </van-swipe>
     </div>
     <div class="index-category">
-        <div v-for="(item,index) in category" :key="index">
+        <router-link v-for="(item,index) in category" :key="index" :to="{name:'categoryList',params:{cid:item.mallCategoryId}}">
             <img v-lazy="item.image">
             <span> {{item.mallCategoryName}} </span>
-        </div>
+        </router-link>
     </div>
     <div class="ad-banner">
         <img :src="adBanner">
@@ -23,14 +21,16 @@
     <div class="recommend-area">
         <div class="index-row-title">商品推荐</div>
         <div class="recommend-body">
-            <swiper :options="swiperOption">
+            <swiper :options="swiperOption">                
                 <swiper-slide v-for="(item,index) in recommendGoods" :key="index">
-                    <div class="recommend-item">
-                           <img :src="item.image" width="80%">
-                           <div>{{item.goodsName}}</div>
-                           <div>￥{{item.price | moneyFormat}}(￥{{item.mallPrice | moneyFormat}})</div>
-                       </div>
-                </swiper-slide>
+                    <router-link :to="{name:'goods',query:{goodsId:item.goodsId}}">
+                        <div class="recommend-item">
+                            <img :src="item.image" width="80%">
+                            <div>{{item.goodsName}}</div>
+                            <div>￥{{item.price | moneyFormat}}(￥{{item.mallPrice | moneyFormat}})</div>
+                        </div>
+                    </router-link>
+                </swiper-slide>                
             </swiper>
         </div>
     </div>
@@ -41,17 +41,16 @@
     </div>
     <div class="hot-area">
         <div class="index-row-title">热卖商品</div>
-        <div class="hot-goods">
+        <div>
             <van-list>
                 <van-row gutter="20">
-                    <van-col span="12" v-for="(item,index) in hotGoods" :key="index">
+                    <van-col span="12" v-for="(item,index) in hotGoods" :key="index" class="hot-goods">
                         <gitem :goodsItem="item" />
                     </van-col>
                 </van-row>
             </van-list>
         </div>
     </div>
-    <navbar :active="0"></navbar>
   </div>
 </template>
 
@@ -59,9 +58,6 @@
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import floor from '../component/floorComponent.vue'
 import gitem from '../component/goodsInfoComponent.vue'
-import searchbar from '../component/searchComponent'
-import navbar from "@/components/component/bottomNavbarComponent.vue"
-
 import url from '@/api.config.js'
 
 export default {
@@ -70,9 +66,7 @@ export default {
         swiper,
         swiperSlide,
         floor,
-        gitem,
-        searchbar,
-        navbar
+        gitem     
     },
     created () {
         this.axios.request({url: url.index, method: 'GET'})
@@ -117,7 +111,9 @@ export default {
             floor2: '',
             floor3: '',
             floorName: '',
-            hotGoods: []
+            hotGoods: [],
+            normal:true,
+            search:""
         }
     }
 }
@@ -126,13 +122,9 @@ export default {
 
 <style lang="scss">
 @import "swiper/dist/css/swiper.css";
-@import "@/assets/css/config.scss";
-    #app{
-        margin: $topbarHeight 0 $navbarHeight 0;
-        
-    }
     .index-logo{
         width: 26px;
+        margin-top: 10px;
     }
     .index-login{
         font-size: 21px;
@@ -163,7 +155,7 @@ export default {
       img{
           width: 80%;
       }
-      >div{
+      >a{
           padding: .3rem;
           font-size: 12px;
           text-align: center;
@@ -200,5 +192,8 @@ export default {
     }
     .hot-area{
         overflow: hidden;
+        .hot-goods{
+            border: 5px solid #eee;
+        }
     }
 </style>

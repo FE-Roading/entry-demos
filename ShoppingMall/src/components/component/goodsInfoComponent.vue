@@ -1,11 +1,11 @@
 <template>
     <div class="goods-info" @click="goToGoodsPage($event)" :key="formatGood.goodsId">
-        <div class="image" >
+        <div class="goods-info-img">
             <img :src="error?defaultImage:formatGood.image" @error="imageErrorAction">
         </div>
-        <div class="name" v-text="formatGood.name"></div>
-        <div class="price" v-cloak>
-             <span>现价:￥{{formatGood.mallPrice | moneyFormat }}</span>
+        <div class="goods-info-name">{{ formatGood.name }}</div>
+        <div class="goods-info-price" v-cloak>
+            <span>现价:￥{{formatGood.mallPrice | moneyFormat }}</span>
             <span>￥{{formatGood.price | moneyFormat }}</span>
         </div>
     </div>
@@ -46,16 +46,18 @@ export default{
 <style lang="scss" scoped>
     .goods-info{
         width: 100%;
-        .name{
+        .goods-info-name{
             padding: 0 8px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space:nowrap;
         }
-        img{
-            width: 100%;
-        }
-        .price{
+        .goods-info-img{
+            img{
+                width: 100%;
+            }
+        } 
+        .goods-info-price{
             padding: 5px 4px;             
             display: flex;
             flex-direction: row;            

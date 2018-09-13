@@ -101,7 +101,26 @@ export  default {
     },
     commentsClear(state){
         state.comments=[]
+    },
+    saveSearchWord(state,word){
+        let words= localStorage.getItem("search-word")?JSON.parse(localStorage.getItem("search-word")):[]
+        console.log("words:",words)
+        if(!words.includes(word)){
+            words.push(word)
+            localStorage.setItem("search-word",JSON.stringify(words))
+            state.shword.push(word)
+        }
+    },
+    getSearchWord(state){
+        let words= localStorage.getItem("search-word")?JSON.parse(localStorage.getItem("search-word")):[]
+        state.shword=words
+    },
+    clearSearchWord(state){
+        localStorage.removeItem("search-word")
+        state.shword=[]
+    },
+    getCarList(state){
+        let goods= localStorage.getItem("car-goods")?JSON.parse(localStorage.getItem("car-goods")):[]
+        state.carList=goods
     }
-
-
 }

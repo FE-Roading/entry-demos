@@ -1,8 +1,8 @@
 <template>
     <div class="category-con">
-        <searchbar>
+        <searchbar :iclick="iClick"> 
             <van-icon name="arrow-left" @click="goBack" />
-        </searchbar>
+         </searchbar> 
         <div class="category">
             <ul class="content">
                 <li v-for="item in catagory" :key="item.ID" :class="{'categoryActive':item.ID==categoryId}" @click="changeCatagory(item.ID)">
@@ -11,23 +11,27 @@
             </ul>
         </div>
         <div class="body">
-            <ul class="left category-list">
-                <li v-for="item in subCatagory" :key="item.ID" :class="{'subcategoryActiive':item.ID==subCategoryId}" @click="changeSubCatagory(item.ID)">
-                    {{item.MALL_SUB_NAME}}
-                </li>
-            </ul>
+            <keep-alive>
+                <ul class="left category-list">
+                    <li v-for="item in subCatagory" :key="item.ID" :class="{'subcategoryActiive':item.ID==subCategoryId}" @click="changeSubCatagory(item.ID)">
+                        {{item.MALL_SUB_NAME}}
+                    </li>
+                </ul>
+            </keep-alive>           
             <div class="right">
-                <van-list
-                    v-model="loadding"
-                    :finished="finished"
-                    @load="getGoodsListById"
-                    class="goods-list"
-                    :offset="offset"
-                    >
-                    <div class="list-item" v-for="item in goodsList" :key="item.ID">
-                        <gitem :goodsItem="item"></gitem>
-                    </div>
-                </van-list>
+                <keep-alive>
+                    <van-list
+                        v-model="loadding"
+                        :finished="finished"
+                        @load="getGoodsListById"
+                        :offset="offset"  
+                        class="goods-list"    
+                        >
+                        <div class="goodlist-item" v-for="item in goodsList" :key="item.ID">
+                            <gitem :goodsItem="item" ></gitem>
+                        </div>                            
+                    </van-list>
+                </keep-alive>
             </div>
         </div>
         <navbar :active="1"></navbar>
@@ -36,7 +40,7 @@
 <script>
 import url from '@/api.config.js'
 import { Toast } from 'vant'
-import searchbar from '../component/searchComponent'
+import searchbar from "../component/searchBarCompoment.vue"
 import gitem from '../component/goodsInfoComponent.vue'
 import navbar from "@/components/component/bottomNavbarComponent.vue"
 
@@ -50,8 +54,8 @@ export default{
         return {
             catagory: [],
             subCatagory: [],
-            categoryId: 0,
-            subCategoryId: 0,
+            categoryId: this.$route.params.cid,
+            subCategoryId: this.$route.params.sid,
             loadding: false,
             finished: false,
             goodsList: [],
@@ -61,39 +65,38 @@ export default{
         }
     },
     created () {
-        this.getCatagory()
+        this.categoryInit()
     },
     methods: {
         goBack () {
             this.$router.go(-1)
         },
-        getCatagory () {
+        iClick(){
+            this.$router.push("search")
+        },
+        categoryInit () {
             this.axios.request({
                 url: url.getCategory,
                 method: 'GET'
             }).then(result => {
                 this.catagory = result.data.message
-                this.categoryId = this.catagory[0].ID
-                this.getSubCatagory(this.categoryId)
+                this.categoryId = this.categoryId || this.catagory[0].ID;
+                this.getSubCatagory(this.categoryId)           
             }).catch(error => {
                 Toast('获取分类列表失败')
                 console.log(error)
             })
         },
-        getSubCatagory (id) {
+        getSubCatagory (id,sid) {
             this.finished = false            
             this.page = 1
-            this.goodsList = []
-            this.$nextTick(()=>{
-                this.goodsList = []
-            })
             this.axios.request({
                 url: url.getSubCategory,
                 method: 'POST',
                 data: { categoryId: id }
             }).then(result => {
                 this.subCatagory = result.data.message
-                this.subCategoryId = this.subCatagory[0].ID
+                this.subCategoryId = sid?sid:this.subCatagory[0].ID
                 this.getGoodsListById(this.subCategoryId)
             }).catch(error => {
                 Toast('获取子类列表失败')
@@ -132,7 +135,6 @@ export default{
         changeSubCatagory (id) {
             this.subCategoryId = id
             this.finished = false
-            this.goodsList = []
             this.page = 1
             this.getGoodsListById(id)
         }
@@ -140,6 +142,12 @@ export default{
     watch:{
       '$route'(to,from){
           this.$router.go(0)
+      },
+      subCategoryId:function(o,n){
+          this.goodsList=[]
+      },
+      categoryId:function(o,n){
+          this.goodsList=[]
       }
     }
 }
@@ -196,6 +204,7 @@ export default{
         .right{
             width: 75%;
             height: 100%;
+            background: #eee;
         }
         .goods-list, .category-list{
             height: 100%;
@@ -215,26 +224,16 @@ export default{
         }
         .goods-list{
             display: flex;
+            flex-direction: row;
             flex-wrap: wrap;
-            .list-item{
-                display: flex;
-                flex-wrap: wrap;
-                flex-direction: row;
-                font-size: .8rem;
-                background-color: #fff;
-                padding:5px;
-                width: 50%;
-                box-sizing: border-box;
-                border: 5px solid #eee;
-                list-item-img{
-                    flex:8;
-                }
-                .list-item-text{
-                    flex:16;
-                    margin-top:10px;
-                    margin-left:10px;
-                }
-            }
+        }
+        .goodlist-item{
+            width: 50%;
+            height: 200px;
+            background: #fff;
+            box-sizing: border-box;
+            border-top: 10px solid #eee;
+            border-left: 10px solid #eee;
         }
     }
 

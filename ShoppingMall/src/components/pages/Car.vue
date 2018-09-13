@@ -13,7 +13,7 @@
             <div class="remd-title"><span>您可能感兴趣的产品</span></div>
             <van-list>
                 <van-row gutter="20">
-                    <van-col span="12" v-for="(item,index) in hotGoods" :key="index">
+                    <van-col span="12" v-for="(item,index) in hotGoods" :key="index" class="hot-goods">
                         <gitem :goodsItem="item" />
                     </van-col>
                 </van-row>
@@ -71,7 +71,14 @@
                 this.$router.push("/login")
             },
             pay(){
-                this.$router.push("/orderPay")
+                let goods=this.getSelectdGoods                
+                goods=goods.map(item=>{
+                    return {
+                        id:item.ID,
+                        qty:item.qty
+                    }
+                })
+                this.$router.push({name:"orderPay",params:{goods:goods,from:"car"}})
             },
             getRecomentGoods(){
                 this.axios.request({url: url.index, method: 'GET'})
@@ -89,7 +96,7 @@
             }
         },
         computed:{
-            ...mapGetters(['goodsSelectedPrice','goodsSelectedQty','getCarStatus','getGoods','getCheckStatus']),
+            ...mapGetters(['goodsSelectedPrice','goodsSelectedQty','getCarStatus','getGoods','getCheckStatus',"getSelectdGoods"]),
             ...mapState(['token','login']),
             checkAllItems:{
                 get(){
@@ -140,6 +147,9 @@
                     top: 24px;
                     left: 0;
                 }
+            }
+            .hot-goods{
+                border: 5px solid #eee;
             }
         }
         .car-navbar{

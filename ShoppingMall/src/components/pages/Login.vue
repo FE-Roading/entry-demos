@@ -56,7 +56,6 @@ export default {
         }
     },
     beforeCreate(){
-
         if(this.$store.state.login){
             Toast.success('您已成功登陆，现跳转至首页')
             setTimeout(()=>{
@@ -103,9 +102,7 @@ export default {
                     if (result.data.message === true) {
                         this.$store.dispatch("loginAction")
                         Toast.success('登陆成功！')
-                        if(this.$route.query.redirect){
-                            this.$router.push(this.$route.query.redirect || '/');
-                        }                       
+                        this.$router.push(this.$route.query.redirect || '/');                    
                     } else {
                         Toast.fail('登陆失败！')
                         console.log(result.data.message)

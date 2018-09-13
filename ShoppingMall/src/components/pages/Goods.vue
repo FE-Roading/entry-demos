@@ -2,7 +2,7 @@
     <div class="goods-con" id="scroller-box" @onscroll="scroll(event)">
          <topbar title="商品详情" class="goods-topbar"></topbar>
         <div class="goods-info">
-            <img :src="goodsItem.IMAGE1" alt="">
+            <img :src="goodsItem.IMAGE1" alt="" @error="goodsInfoError">
             <div>{{ goodsItem.NAME }}</div>
             <div class="price">
                 <p>现价: <span>{{ goodsItem.PRESENT_PRICE | moneyFormat }}</span></p>
@@ -13,15 +13,34 @@
         <div class="goods-content">
             <van-tabs swipeable sticky>
                 <van-tab title="商品详情">
-                <div class="detail" v-html="goodsItem.DETAIL">
-                </div>
-            </van-tab>
+                        <keep-alive>
+                    <div class="detail" v-html="goodsItem.DETAIL"></div>
+                        </keep-alive>
+                </van-tab>
                 <van-tab title="评价">
-                    <gcomment :gid="goodsId"></gcomment>
+                    <keep-alive>
+                        <gcomment :gid="goodsId"></gcomment>
+                    </keep-alive>
                 </van-tab>
             </van-tabs>
         </div>        
         <scrollbar></scrollbar>
+        <van-actionsheet v-model="purchaseModal" title="请选择商品规格">
+            <div class="purchase-item">
+                <img :src="goodsItem.IMAGE1" alt="">
+                <div class="detail">
+                    <div class="title">{{goodsItem.NAME}}</div>
+                    <div class="price">价格：¥ <em>{{ goodsItem.PRESENT_PRICE | moneyFormat }}</em></div>
+                </div>                
+            </div>
+            <div class="purchase-ammount">
+                <span>购买商品数量：</span>
+                <van-stepper class="qty-con" v-model="pnum" step="1" :min="1" :max="goodsItem.AMOUNT"  integer/>
+            </div>
+            <van-button size="large" type="danger" @click="purchaseNow">
+                立即购买
+            </van-button>
+        </van-actionsheet>
         <div class="goods-navbar">
             <van-row class="goods-row">
                 <van-col span="8">
@@ -34,7 +53,7 @@
                     <div><van-button size="large" type="primary" class="btn" @click="addToCar(goodsItem)">加入购物车</van-button></div>
                 </van-col>
                 <van-col span="8">
-                    <div><van-button size="large" type="danger" class="btn">立即购买</van-button></div>
+                    <div><van-button size="large" type="danger" class="btn" @click="purchase">立即购买</van-button></div>
                 </van-col>
             </van-row>
         </div>
@@ -52,14 +71,16 @@ export default{
     components:{
         scrollbar,
         topbar,
-        gcomment
+        gcomment        
     },
     data () {
         return {
             goodsId: '',
             goodsItem: {},
             active: 0,
-            fixed: false
+            fixed: false,
+            purchaseModal:false,
+            pnum:1
         }
     },
     created () {
@@ -73,8 +94,22 @@ export default{
         scrollToTop(event){
             window.scrollTo(0,0)
         },
+        goodsInfoError(){
+            Toast("该商品数据存在问题，请购买其他商品！")
+            this.goBack()
+        },
         goBack () {
             this.$router.go(-1)
+        },
+        purchase(){
+            this.purchaseModal=true
+        },
+        purchaseNow(){
+            var goods=[{
+                id:this.goodsId,
+                qty:this.pnum
+            }]
+            this.$router.push({name:"orderPay",params:{goods:goods,from:"goods"}})
         },
         getInfo () {
             this.axios.request({
@@ -173,5 +208,39 @@ export default{
             border: 0;
             height: 100%;
         }
+    }
+    .purchase-item{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        .detail{
+            margin-left: 10px;
+            width: 65%;
+            font-size: 17px;
+            padding: 15px 0;
+            .price{
+                margin-top: 10px;
+                em{
+                    font-weight: 700;
+                }
+            }
+            >div{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }            
+        }
+        img{
+            width: 90px;
+            height: 90px;
+            max-width: 30%;
+        }
+    }
+    .purchase-ammount{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        font-size: 18px;
+        padding: 10px 30px;
     }
 </style>

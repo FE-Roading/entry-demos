@@ -1,14 +1,14 @@
 <template>
-    <div :class="['search-bar', cname]" >
+    <div :class="$style.searchbar">
         <van-row>
-            <van-col span="3" class="icon">
+            <van-col span="3" :class="$style.icon">
                 <slot  />
             </van-col>            
             <van-col span="16">
-            <input type="text" placeholder="查找" />
+            <input type="text" placeholder="商品搜索内容" @click="onInputClick" />
             </van-col>
             <van-col span="5">
-            <van-button size="small" class="search">查找</van-button>
+            <van-button size="small" :class="$style.search" @click="onSearchClick">搜索</van-button>
             </van-col>
         </van-row>
     </div>
@@ -20,20 +20,36 @@ export default{
         cname: {
             type: String,
             default: ''
+        },
+        search:{
+            type:Function
+        },
+        iclick:{
+            type:Function
+        }
+    },
+    data(){
+        return {
+            word:""
         }
     },
     methods: {
-        goBack () {
-            this.$router.go(-1)
-        }
+        onSearchClick(){
+            if(this.word.trim()){
+                this.search?this.search(this.word.trim()):""
+            }            
+        },
+        onInputClick(){
+            this.iclick?this.iclick():""
+        }      
     }
 }
 </script>
-<style lang="scss" scopped>
+<style lang="scss" module>
     $inputColor:#ffffff;
-    .search-bar{
-        height: 2.2em;
-        line-height: 2.2em;
+    .searchbar{
+        height: 2.2rem;
+        line-height: 2.2rem;
         background-color: #e5017d;
         color: #fff;
         overflow: hidden;
@@ -43,8 +59,8 @@ export default{
         right: 0;
         z-index: 10;
         .icon{
-            height: 2.2em;
-            line-height: 2.2em;
+            height: 2.2rem;
+            line-height: 2.2rem;
             font-size: 20px;
             text-align: center;
         }
@@ -70,5 +86,6 @@ export default{
         input:-ms-input-placeholder{
             color:$inputColor;
         }
-  }
+    }
+    
 </style>

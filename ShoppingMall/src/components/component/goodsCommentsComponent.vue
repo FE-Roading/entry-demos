@@ -1,6 +1,6 @@
 <template>
     <div class="gcomments">
-        <ul>
+        <ul v-if="comments.length>0">
             <li v-for="(item,index) in comments" :key="index">
                 <div class="title">
                     <span>{{item.userName}}</span>
@@ -11,6 +11,7 @@
                 </div>
             </li>          
         </ul>
+        <div v-else class="no-comments">暂无评论，赶快购买添加评论吧！</div>
         <van-loading type="spinner" color="black" v-show="loading" class="loading" />
     </div>
 </template>
@@ -72,6 +73,10 @@
             padding: 10px;
             border: 1px solid #eee;
             background-color: #fff;
+        }
+        .no-comments{
+            font-size: 18px;
+            text-align: center;
         }
     }
     .title{

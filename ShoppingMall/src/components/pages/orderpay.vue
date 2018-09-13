@@ -2,17 +2,22 @@
     <div :class="$style.orderpayCon">
         <topbar title="确认订单"></topbar>
         <h3>收货信息：</h3>
-        <div :class="$style.address" @click="addressPick">            
+        <div :class="$style.address" @click="addressPick" v-if="this.address">            
             <h4>{{address['name']}} - {{address['tel']}}</h4>
             <p>{{ address.address }}</p>
             <van-icon name="arrow" :class="$style.pickIcon"/>
         </div>
-        <div :class="$style.goodList">
-            <h3>订单详情：</h3>
-             <goodscard :goodItem="item" :classCheckbox="$style.poCheck" :classGoods="$style.poGoods" v-for="item in getSelectdGoods" :key="item.ID"></goodscard>
+        <div :class="$style.address" v-else @click="addressAdd">
+            <van-icon name="add2" />
+            <span :class="$style.addressadd">添加收货地址</span>
+            <van-icon name="arrow" :class="$style.pickIcon"/>
+        </div>        
+        <h3>订单详情：</h3>
+        <div :class="$style.payinggoods">            
+            <payItem :goodItem="item" :classCheckbox="$style.poCheck" :classGoods="$style.poGoods" v-for="item in goodsList" :key="item.ID"></payItem>
         </div>        
         <div :class="$style.orderInfo">
-            <div :class="$style.cost">订单金额：<em>{{ goodsSelectedPrice | moneyFormat }}</em>元</div>
+            <div :class="$style.cost">订单金额：<em>{{ goodsPrice | moneyFormat }}</em>元</div>
             <van-button type="default" size="large" :class="$style.payway" plain  @click="orderPay(0)"  :loading="loading">货到付款</van-button>
             <van-button type="primary" size="large" @click="orderPay(1)" :loading="loading">在线支付</van-button>
         </div>
@@ -20,7 +25,7 @@
 </template>
 <script>
     import topbar from "../component/topbarComponent.vue"
-    import goodscard from "../component/goodsCardComponent.vue"
+    import payItem from "../component/payItemComponent.vue"
     import {mapGetters,mapMutations,mapState} from "vuex"
     import { Toast, Dialog } from 'vant';
     import url from "@/api.config.js"
@@ -28,48 +33,78 @@
     export default{
         data(){
             return {
-                address:{},
+                address:this.$route.params.address,
                 loading:false,
-                payed:false
+                payed:false,
+                goodsList:[],
+                payingList:this.$route.params.goods || [],
+                source:this.$route.params.from
             }
         },   
         created(){
+            var that=this
             if(!(this.login && this.token && this.id)){
                 console.log("跳转至登陆页面！")
                 this.$router.push({name:'login',query:{redirect:"/orderpay"}})
             }
-            if(!this.goodsSelectedQty){
+            if(!(this.payingList)){
                 Toast("您没有选中要支付的订单，正在返回！")
                 this.goBack()
             }
-            if(this.$route.params.address){
-                this.address=this.$route.params.address
-            }else{
-                this.axios.request({
-                    url:url.address,
-                    method:"POST",
-                    data:{id:this.id}
-                }).then((result)=>{
-                    if(!result.data.message){
-                        Toast("您您先添加收货地址!")
-                        this.$router.push({name:"addressEdit",params:{back:true}})
-                    }else{
-                        let item=result.data.message
-                        this.address={id:item._id,name:item.name,tel:item.tel,address:item.province+item.city+item.county+item.address_detail}
-                    }
-                    
-                })
-            }
+            this.axios.request({
+                url:url.address,
+                method:"POST",
+                data:{id:this.id}
+            }).then((result)=>{
+                if(result.data.message){
+                    let item=result.data.message
+                    this.address={id:item._id,name:item.name,tel:item.tel,address:item.province+item.city+item.county+item.address_detail}
+                }
+            })
+            let goods=this.payingList.map(item=>{
+                return item.id
+            })
+            this.axios.request({
+                url:url.goodsList,
+                method:"POST",
+                data:{goods}
+            }).then((result)=>{
+                if(result.data.message.length>0){
+                    let items=result.data.message
+                    let temp=[]
+                    items.forEach(item=>{
+                        this.payingList.forEach(good=>{
+                            if(item.ID==good.id){
+                                item.qty=good.qty
+                                temp.push(item)
+                                return item
+                            }
+                        })
+                    })
+                    this.goodsList=temp
+                }else{
+                    Toast("未购买任何商品，正在返回！")
+                    that.goBack()          
+                }
+            }).catch((error)=>{
+                Toast("商品信息获取出错！")
+                console.log(error)
+                that.goBack()
+            })
+        
         },
         components:{
             topbar,
-            goodscard
+            payItem
         },
         methods:{
             orderPay(pay){
+                if(!this.address){
+                    Toast("请添加收货地址！")
+                }
                 Dialog.confirm({
                     title: '订单支付',
-                    message: '合集费用为：'+this.goodsSelectedPrice+'元，确认完成订单?'
+                    message: '合集费用为：'+this.goodsPrice+'元，确认完成订单?'
                 }).then(() => {
                     this.loading=true
                     this.axios.request({
@@ -77,16 +112,20 @@
                         method:"POST",
                         data:{
                             id:this.id,
-                            total:this.goodsSelectedPrice,
-                            goods:this.getSelectdGoods,
+                            total:this.goodsPrice,
+                            goods:this.goodsList,
                             address:this.address,
                             pay:pay
                         }
                     }).then((result)=>{
                         if(result.data.message===true){
+                            if(this.$route.params.from=="car"){
+                                this.goodsList.forEach(item=>{
+                                    this.goodsDelete(item.ID)
+                                })   
+                            }                         
                             Toast("订单已完成，正跳转至历史订单页面")
-                            this.payed=true
-                            this.goodsSelectedDel()
+                            this.payed=true                            
                             this.$router.push("/order")
                         }else{
                             Toast("订单出现错误")
@@ -107,18 +146,19 @@
             addressPick(){
                 this.$router.push({name:"addressList",params:{back:true}})
             },
-            ...mapMutations(["goodsSelectedDel"])
+            addressAdd(){
+                this.$router.push({name:"addressEdit",params:{goods:this.goodsList,url:"orderPay"}})
+            },
+            ...mapMutations(["goodsDelete"])
         },
         computed:{
-            ...mapGetters(['goodsSelectedPrice','goodsSelectedQty','getSelectdGoods','get']),
-            ...mapState(['token','login','id','carList'])
-        },
-        watch:{
-            goodsSelectedQty(newValue){
-                if(!newValue && !this.payed){
-                    Toast("订单已全部删除，正在返回上级页面！")
-                    this.goBack()
-                }
+            ...mapState(['token','login','id','carList']),
+            goodsPrice(){
+                let money=0
+                this.goodsList.forEach((item)=>{
+                    money=money+ item.qty*item.PRESENT_PRICE
+                })
+                return money
             }
         }
     }
@@ -139,9 +179,19 @@
             padding: 10px 0;
         }
         .address{
-            padding-top: 1px;
-            background-color: #fff;
+            padding: 10px;
+            background: #fff;
+            vertical-align: text-top;
+            font-size: 18px;
+            line-height: 18px;
             position: relative;
+            i{
+                padding-left: 20px;
+            }
+            .addressadd{
+                vertical-align: text-top;
+                padding-left: 10px;
+            }
             p{
                 line-height: 20px;
                 overflow:hidden; 
@@ -167,7 +217,7 @@
                 }
             }
         }       
-        .goodList{            
+        .payinggoods{            
             padding-bottom: 10px;            
             .poCheck{
                 display: none;

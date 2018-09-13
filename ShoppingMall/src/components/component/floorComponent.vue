@@ -4,19 +4,26 @@
         <div class="floor">
             <div class="title" v-text="floorTitle"></div>
             <div class="first">
-                <div class="col-one"><img :src="floorData0.image" /></div>
-                <div class="col-two">
-                    <div><img :src="floorData1.image" /></div>
-                    <div><img :src="floorData2.image" /></div>
+                <router-link class="floor-col" :to="{name:'goods',query:{goodsId:floorData0.goodsId}}">
+                    <div class="col-one"><img :src="floorData0.image" /></div>
+                </router-link>
+                <div class="col-two floor-col">
+                    <router-link :to="{name:'goods',query:{goodsId:floorData1.goodsId}}">
+                        <div><img :src="floorData1.image" /></div>
+                    </router-link>
+                    <router-link :to="{name:'goods',query:{goodsId:floorData2.goodsId}}">
+                        <div><img :src="floorData2.image" /></div>
+                    </router-link>
                 </div>
             </div>
 
             <div class="two">
                 <div v-for="(item ,index) in floorData.slice(3)" :key="index">
-                    <img :src="item.image"/>
+                    <router-link :to="{name:'goods',query:{goodsId:item.goodsId}}">
+                        <img :src="item.image"/>
+                    </router-link>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -53,7 +60,7 @@ export default {
             display: flex;
             flex-direction:row;
             background-color: #fff;
-            >div{
+            .floor-col{
                 width: 50%;
                 box-sizing: border-box;
                 border-bottom:1px solid #ddd;

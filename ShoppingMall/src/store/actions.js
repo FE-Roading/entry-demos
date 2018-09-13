@@ -18,5 +18,5 @@ export default {
     logoutAction({commit}){
         clearCookie()
         commit("logout")
-    } 
+    }
 }

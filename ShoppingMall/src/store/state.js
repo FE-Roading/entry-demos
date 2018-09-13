@@ -4,6 +4,7 @@ export default{
     name:'',
     login:false,
     carList:{},
+    shword:[],
     hotGoods:[],
     comments:[]
 }

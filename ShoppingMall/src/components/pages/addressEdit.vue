@@ -49,7 +49,11 @@
                     if(result.data.message===true){
                         let message=this.add?'地址添加成功':'地址修改成功'
                         Toast(message)
-                        this.goBack()
+                        if(this.$route.params.url){
+                            this.$router.push({name:this.$route.params.url,params:{goods:this.$route.params.goods}})
+                        }else{
+                            this.goBack()
+                        }                        
                     }else{
                         let message=this.add?'地址添加失败':'地址修改成功失败'
                         Toast(message)

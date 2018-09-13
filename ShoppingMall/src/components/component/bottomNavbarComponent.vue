@@ -33,6 +33,7 @@
         background-color: $navbarbgColor;
         color: $navbarColor;
         position: fixed;
+        z-index: 9;
         bottom: 0;
     }
     .van-tabbar-item--active{

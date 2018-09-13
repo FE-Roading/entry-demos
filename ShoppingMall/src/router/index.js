@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import {getCookie} from "@/utils/index.js"
 
-import Home from '@/components/pages/Index.vue'
+import Home from '@/components/pages/Home.vue'
+import Search from '@/components/pages/Search.vue'
 import Register from '@/components/pages/Register.vue'
 import Login from '@/components/pages/Login.vue'
 import Goods from '@/components/pages/Goods.vue'
@@ -11,7 +12,7 @@ import Car from '@/components/pages/Car.vue'
 import Account from '@/components/pages/Account.vue'
 import AddressEdit from '@/components/pages/addressEdit.vue'
 import addressList from '@/components/pages/addressList.vue'
-import OrderPay from "@/components/pages/orderpay.vue"
+import OrderPay from "@/components/pages/Orderpay.vue"
 import OrderHistory from "@/components/pages/OrderHistory.vue"
 import UserInfo from "@/components/pages/UserInfo.vue"
 import Rate from "@/components/pages/Rate.vue"
@@ -60,6 +61,11 @@ let router=new Router({
             path:"/account",
             name:"account",
             component:Account
+        },
+        {
+            path: '/search',
+            name: 'search',
+            component: Search,
         },
         {
             path:'/addresslist',
